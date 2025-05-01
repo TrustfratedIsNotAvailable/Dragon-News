@@ -1,0 +1,82 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+
+# Firebase Admin SDK credentials (never commit this)
+firebase-adminsdk*.json
+
+# Environment variables
+.env
+.env.*     # if using .env.production, .env.local, etc.
+
+# Build output
+node_modules/
+dist/
+dist-ssr/
+*.local
+build/
+
+# Editor directories and files
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Operating system files
+Thumbs.db
+ehthumbs.db
+
+# NPM package manager cache
+.npm/
+.yarn-cache/
+.pnpm-cache/
+
+# Next.js / Nuxt.js specific files
+.next/
+.nuxt/
+
+# React Native / Expo specific files
+.expo/
+.expo-shared/
+
+# TypeScript specific files
+*.tsbuildinfo
+
+# Jest coverage directory
+coverage/
+
+# Parcel-bundler cache (if using Parcel)
+.cache/
+
+# SvelteKit specific files
+.svelte-kit/
+
+# Vite build output
+vite-dist/
+
+# IDEs
+*.iml
+.idea/
+*.sublime-project
+*.sublime-workspace
