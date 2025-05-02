@@ -1,9 +1,11 @@
 import { FaEye, FaStar, FaShareAlt } from "react-icons/fa";
 import { format } from "date-fns";
 import { CiBookmark } from "react-icons/ci";
+import { Link } from "react-router";
 
 const NewsCard = ({ news }) => {
   const {
+    id,
     title,
     author,
     image_url,
@@ -21,17 +23,19 @@ const NewsCard = ({ news }) => {
           <img
             src={author?.img}
             alt={author?.name}
-            className="w-10 h-10 rounded-full object-cover"
+            className="w-10 h-10 rounded-full object-cover object-top"
           />
           <div>
-            <h2 className="text-sm text-primary font-semibold">{author?.name}</h2>
+            <h2 className="text-sm text-primary font-semibold">
+              {author?.name}
+            </h2>
             <p className="text-xs text-accent">
               {format(new Date(published_date), "yyyy-MM-dd")}
             </p>
           </div>
         </div>
         <div className="flex gap-2">
-          <CiBookmark size={20} className="text-gray-500 cursor-pointer"/>
+          <CiBookmark size={20} className="text-gray-500 cursor-pointer" />
           <FaShareAlt size={20} className="text-gray-500 cursor-pointer" />
         </div>
       </div>
@@ -53,16 +57,19 @@ const NewsCard = ({ news }) => {
         {details.length > 300 ? (
           <>
             {details.slice(0, 300)}...{" "}
-            <span className="text-[#FF8C47] cursor-pointer font-medium">
+            <Link
+              to={`/details/${id}`}
+              className="text-[#FF8C47] cursor-pointer font-medium"
+            >
               Read More
-            </span>
+            </Link>
           </>
         ) : (
           details
         )}
       </div>
 
-      <hr className="mx-4 my-2 text-[#E7E7E7] border-t-2"/>
+      <hr className="mx-4 my-2 text-[#E7E7E7] border-t-2" />
 
       {/* Footer */}
       <div className="px-4 pb-4 flex justify-between items-center pt-3">
@@ -70,9 +77,7 @@ const NewsCard = ({ news }) => {
           {Array.from({ length: 5 }, (_, i) => (
             <FaStar
               key={i}
-              className={
-                i < rating?.number ? "text-info" : "text-accent"
-              }
+              className={i < rating?.number ? "text-info" : "text-accent"}
             />
           ))}
           <span className="ml-1 text-sm font-medium text-gray-700">
@@ -88,4 +93,4 @@ const NewsCard = ({ news }) => {
   );
 };
 
-export default NewsCard; 
+export default NewsCard;

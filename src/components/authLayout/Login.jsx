@@ -1,12 +1,14 @@
 import React, { use, useRef } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
-
 
 const Login = () => {
   const { login, resetPassword } = use(AuthContext);
   const emailRef = useRef(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -20,6 +22,8 @@ const Login = () => {
 
         e.target.email.value = "";
         e.target.password.value = "";
+
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         toast.error(error.message);

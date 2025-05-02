@@ -1,38 +1,53 @@
-import React from 'react';
-import { AuthContext } from './AuthContext';
-import { createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
-import { auth } from '../services/firebase';
+import React, { useEffect, useState } from "react";
+import { AuthContext } from "./AuthContext";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
+import { auth } from "../services/firebase";
 
-const AuthProvider = ({children}) => {
-    const createUser =(email,password)=>{
-        return createUserWithEmailAndPassword(auth,email,password);
-    }
-    const login=(email,password)=>{
-        return signInWithEmailAndPassword(auth,email,password);
-    }
-    const signInWithProvider=(provider)=>{
-        return signInWithPopup(auth,provider)
-    }
-    const logOut=()=>{
-        return signOut(auth);
-    }
-    const resetPassword=(email)=>{
-        return sendPasswordResetEmail(auth,email);
-    }
+const AuthProvider = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState(null);
 
-    const info ={
-        createUser,
-        login,
-        signInWithProvider,
-        logOut,
-        resetPassword
-    }
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+  const login = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+  const signInWithProvider = (provider) => {
+    return signInWithPopup(auth, provider);
+  };
+  const logout = () => {
+    return signOut(auth);
+  };
+  const resetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
 
-    return (
-        <AuthContext value={info} >
-            {children}
-        </AuthContext>
-    );
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+
+  const info = {
+    currentUser,
+    createUser,
+    login,
+    signInWithProvider,
+    logout,
+    resetPassword,
+  };
+
+  return <AuthContext value={info}>{children}</AuthContext>;
 };
 
 export default AuthProvider;

@@ -5,6 +5,7 @@ import LatestNews from "../components/homeLayout/LatestNews";
 import Navbar from "../components/homeLayout/Navbar";
 import LeftAside from "../components/homeLayout/LeftAside";
 import RightAside from "../components/homeLayout/RightAside";
+import bg from "../assets/bg.png";
 
 const HomeLayouts = () => {
   return (
@@ -27,6 +28,7 @@ const HomeLayouts = () => {
         </section>
         <aside className="col-span-3 sticky top-2 self-start">
           <RightAside />
+          <img src={bg} alt="bg" srcset="" className="w-full h-auto" />
         </aside>
       </main>
     </>
