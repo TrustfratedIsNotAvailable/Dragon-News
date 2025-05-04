@@ -63,3 +63,13 @@ Using `useState([])` for tracking the user state is **incorrect** for several re
    if (!currentUser) {
      // Show login screen
    }
+
+---
+
+##Firebase Project: dragon-news-b995c
+
+###Hosting URL:
+https://dragon-news-b995c.web.app
+
+###Firebase Console:
+https://console.firebase.google.com/project/dragon-news-b995c/overview
